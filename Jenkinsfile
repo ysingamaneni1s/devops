@@ -1,22 +1,24 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
+        stage('Example') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                //submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                    string(name: 'Password', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+
             steps {
-                echo 'Building..'
+                echo "Hello, ${PERSON}, nice to meet you."
+                echo "Hello, ${Password}, nice to meet you."
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+      
+        
+        
     }
 }
-Jenkinsfile
